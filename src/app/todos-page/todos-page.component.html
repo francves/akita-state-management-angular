@@ -1,12 +1,18 @@
-<p>
-  todos-page works!
-</p>
-<input type="text" class="form-control" placeholder="Add Todo..." #input (keydown.enter)="add(input)">
-<h2>Todos:</h2>
-<select [formControl]="control">
-  <option *ngFor="let filter of filters;" [ngValue]="filter.value">{{filter.label}}
-  </option>
-</select>
-<div *ngFor="let todo of todos$ | async">
-  <app-todo [todo]="todo" (complete)="complete($event)" (delete)="delete($event)"></app-todo>
+<div style="width: 40%; margin: 0 auto">
+  <mat-form-field style="display: block;">
+    <mat-label>Nueva tarea</mat-label>
+    <input matInput placeholder="Ingrese la Tarea..." #input (keydown.enter)="add(input)">
+  </mat-form-field>
+  <mat-form-field style="display: block;">
+    <mat-label>Estado de la tarea</mat-label>
+    <mat-select [formControl]="control">
+      <mat-option *ngFor="let filter of filters;" [value]="filter.value">
+        {{filter.label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <h2>Tareas:</h2>
+  <div *ngFor="let todo of todos$ | async">
+    <app-todo [todo]="todo" (complete)="complete($event)" (delete)="delete($event)"></app-todo>
+  </div>
 </div>

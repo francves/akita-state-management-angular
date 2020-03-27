@@ -6,6 +6,16 @@ import { AppComponent } from './app.component';
 import { TodosPageComponent } from './todos-page/todos-page.component';
 import { TodoComponent } from './todos-page/todo/todo.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { 
+  MatFormFieldModule, 
+  MatInputModule, 
+  MatOptionModule, 
+  MatSelectModule, 
+  MatCheckboxModule,
+  MatIconModule,
+  MatButtonModule
+} from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -16,7 +26,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

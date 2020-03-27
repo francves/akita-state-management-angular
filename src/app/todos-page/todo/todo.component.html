@@ -1,5 +1,6 @@
 <label>
-  <input type="checkbox" [formControl]="control"/>
-  <span>{{ todo.title }}</span>
-  <button (click)="delete.emit(todo.id)">X</button>
+  <mat-checkbox [formControl]="control">{{ todo.title }}</mat-checkbox>
+  <button mat-icon-button (click)="delete.emit(todo.id)">
+    <mat-icon>delete</mat-icon>
+  </button>
 </label>
