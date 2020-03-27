@@ -3,6 +3,7 @@ import { TodosService } from '../state/todos.service';
 import { Observable } from 'rxjs';
 import { Todo } from '../state/todo.model';
 import { TodosQuery } from '../state/todos.query';
+import { ID } from '@datorama/akita';
 
 @Component({
   selector: 'app-todos-page',
@@ -12,7 +13,6 @@ import { TodosQuery } from '../state/todos.query';
 export class TodosPageComponent implements OnInit {
 
   todos$: Observable<Todo[]>;
-  todoList: Todo[];
 
   constructor(
     private todosService: TodosService,
@@ -28,4 +28,13 @@ export class TodosPageComponent implements OnInit {
     input.value = '';
   }
 
+  delete(id: ID){
+    console.log("Delete: ", id)
+    this.todosService.delete(id);
+  }
+
+  complete(todo: Todo){
+    console.log("Completado: ", todo)
+    this.todosService.complete(todo);
+  }
 }

@@ -1,0 +1,5 @@
+<label>
+  <input type="checkbox" [formControl]="control"/>
+  <span>{{ todo.title }}</span>
+  <button (click)="delete.emit(todo.id)">X</button>
+</label>
