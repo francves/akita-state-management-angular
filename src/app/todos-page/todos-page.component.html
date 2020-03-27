@@ -3,6 +3,10 @@
 </p>
 <input type="text" class="form-control" placeholder="Add Todo..." #input (keydown.enter)="add(input)">
 <h2>Todos:</h2>
+<select [formControl]="control">
+  <option *ngFor="let filter of filters;" [ngValue]="filter.value">{{filter.label}}
+  </option>
+</select>
 <div *ngFor="let todo of todos$ | async">
   <app-todo [todo]="todo" (complete)="complete($event)" (delete)="delete($event)"></app-todo>
 </div>

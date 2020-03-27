@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Todo } from '../state/todo.model';
 import { TodosQuery } from '../state/todos.query';
 import { ID } from '@datorama/akita';
+import { VISIBILITY_FILTER, initialFilters } from '../models/filter.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-todos-page',
@@ -13,6 +15,10 @@ import { ID } from '@datorama/akita';
 export class TodosPageComponent implements OnInit {
 
   todos$: Observable<Todo[]>;
+  activeFilter$: Observable<VISIBILITY_FILTER>;
+  filters = initialFilters;
+
+  control: FormControl;
 
   constructor(
     private todosService: TodosService,
@@ -20,7 +26,14 @@ export class TodosPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.todos$ = this.todosQuery.selectAll()
+    this.todos$ = this.todosQuery.selectVisibleTodos$;
+
+    this.activeFilter$ = this.todosQuery.selectVisibilityFilter$;
+    this.control = new FormControl(this.activeFilter$);
+    this.control.valueChanges.pipe().subscribe(c => {
+      console.log("Change: ", c)
+      this.changeFilter(c)
+    });
   }
 
   add(input: HTMLInputElement) {
@@ -36,5 +49,9 @@ export class TodosPageComponent implements OnInit {
   complete(todo: Todo){
     console.log("Completado: ", todo)
     this.todosService.complete(todo);
+  }
+
+  changeFilter(filter: VISIBILITY_FILTER) {
+    this.todosService.updateFilter(filter);
   }
 }
