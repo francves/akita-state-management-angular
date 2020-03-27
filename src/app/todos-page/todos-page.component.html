@@ -1,0 +1,6 @@
+<p>
+  todos-page works!
+</p>
+<input type="text" class="form-control" placeholder="Add Todo..." #input (keydown.enter)="add(input)">
+<h2>Todos:</h2>
+<p *ngFor="let todo of todos$ | async">{{todo.title}}</p>
